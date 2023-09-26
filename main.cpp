@@ -47,37 +47,37 @@ int receive_scan_width(){ //use PD6//
 }
 
 int main() {
-//    gpio_write((0x00), GPIO_J);
-//        gpio_set_config((0x00 << 11), GPIO_J);
-//        while(1) {
-//            uint16_t port_c_state = gpio_read(GPIO_J);
-//            bool is_button_pressed = (port_c_state & (1 << 3));
-//            if (is_button_pressed) {
-//                for(int a=0;a<5;++a){
-//                    wait_1ms();
-//                }
-//                break;
-//            } else {
-//            }
-//        }
+    gpio_write((0x00), GPIO_J);
+    gpio_set_config((0x00 << 11), GPIO_J);
+        while(1) {
+            uint16_t port_c_state = gpio_read(GPIO_J);
+            bool is_button_pressed = (port_c_state & (1 << 3));
+            if (is_button_pressed) {
+                for(int a=0;a<5;++a){
+                    wait_1ms();
+                }
+                break;
+            } else {
+            }
+        }
 
-//    gpio_set_config((0x00 << 15), GPIO_D);
-//    gpio_set_config((0x00 << 14), GPIO_D);
-//    int length,width;
-//    length = receive_scan_length(); //PD7//
-//    width = receive_scan_width();   //PD6//
-//    xpd_echo_int(length, XPD_Flag_UnsignedDecimal);
-//    xpd_echo_int(width, XPD_Flag_UnsignedDecimal);
-//    for(int a=0;a<5;++a){
-//                    wait_1ms();
-//                }
-//    left_and_re_adjust();
-//    for(int a=0;a<2;++a) {//adjust steering position//
-//        forward();
-//    }
-//    for(int a=0;a<5;++a){
-//        wait_1ms();
-//    }
+    gpio_set_config((0x00 << 15), GPIO_D);
+    gpio_set_config((0x00 << 14), GPIO_D);
+    int length,width;
+    length = receive_scan_length(); //PD7//
+    width = receive_scan_width();   //PD6//
+    xpd_echo_int(length, XPD_Flag_UnsignedDecimal);
+    xpd_echo_int(width, XPD_Flag_UnsignedDecimal);
+    for(int a=0;a<5;++a){
+                    wait_1ms();
+                }
+    left_and_re_adjust();
+    for(int a=0;a<2;++a) {//adjust steering position//
+        forward();
+    }
+    for(int a=0;a<5;++a){
+        wait_1ms();
+    }
     ultrasonic_initialization(); //PJ1 to echo, PJ2 to trig//
 
     while (1) {
@@ -94,14 +94,14 @@ int main() {
                 xpd_puts("distance: ");
                 xpd_echo_int(distance, XPD_Flag_UnsignedDecimal);
                 xpd_puts(" mm \n ");
-//                if ((distance < 200) && (distance != 0)) {
-//                    avoid();
-//                    path();
-//                    break;
-//                } else {
-//                    path();
-//                    break;
-//                }
+                if ((distance < 200) && (distance != 0)) {
+                    avoid();
+                    path();
+                    break;
+                } else {
+                    path();
+                    break;
+                }
             }
             t = 0;
             wait_1ms(); //use a delay to wait for some time//
